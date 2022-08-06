@@ -32,15 +32,9 @@ class AlienInvasion():
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = True
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = True
+                self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = False
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = False
+                self._check_keyup_events(event)
 
     def _update_screen(self):
         # При каждом проходе цикла перерисовывать экран
@@ -48,6 +42,20 @@ class AlienInvasion():
         self.ship.blitme()
         # Отображение последнего прорисованного экрана.
         pygame.display.flip()
+
+    def _check_keydown_events(self, event):
+        """Реагирует на нажатие клавиш."""
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = True
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = True
+
+    def _check_keyup_events(self, event):
+        """Реагирует на отпускание клавиш."""
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
 
 
 if __name__ == '__main__':
