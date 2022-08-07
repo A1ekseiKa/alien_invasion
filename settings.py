@@ -12,7 +12,7 @@ class Settings():
         self.ship_speed = 1.5
 
         # Параметры снаяда.
-        self.bulet_speed = 1
+        self.bulet_speed = 1.5
         self.bulet_width = 3
         self.bulet_height = 15
         self.bulet_color = (60, 60, 60)
