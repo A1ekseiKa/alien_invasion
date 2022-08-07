@@ -74,6 +74,8 @@ class AlienInvasion():
             # Создание нового флота и размещение корабля в центре экрана.
             self._create_fleet()
             self.ship.center_ship()
+            # Указатель мыши скрывается.
+            pygame.mouse.set_visible(False)
 
     def _update_screen(self):
         # При каждом проходе цикла перерисовывать экран
@@ -214,6 +216,7 @@ class AlienInvasion():
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_aliens_bottom(self):
         """Проверка, добрались ли пришельцы до нижнего края экранаю"""
