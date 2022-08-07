@@ -1,10 +1,12 @@
 import sys
+from time import sleep
 import pygame
 
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+from game_stats import GameStats
 
 
 class AlienInvasion():
@@ -19,6 +21,10 @@ class AlienInvasion():
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
+
+        # Создание экземпляра, для хранения статистики.
+        self.stats = GameStats(self)
+
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
@@ -91,7 +97,6 @@ class AlienInvasion():
 
         self._check_bullet_alien_collisions()
 
-
     def _create_fleet(self):
         """Создание флота для вторжения."""
         # Создание пришельца и вычисление количество пришельцев в ряду.
@@ -132,7 +137,7 @@ class AlienInvasion():
 
         # Проверка коллизий "Пришелец - корабль"
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("Ship hit!!!")
+            self._ship_hit()
 
     def _check_fleet_edges(self):
         """Реагирует на достижение пришельцем края экрана."""
@@ -151,13 +156,29 @@ class AlienInvasion():
         # Проверка попаданий в пришельцев.
         # При обнаружении попадания, удалить снаряд и пришельца.
         collisions = pygame.sprite.groupcollide(
-            self.bullets, self.aliens,True, True
+            self.bullets, self.aliens, True, True
         )
         # Если не осталось пришельцев на экране.
         if not self.aliens:
             # Уничтожение существующих снарядов и создание нового флота.
             self.bullets.empty()
             self._create_fleet()
+
+    def _ship_hit(self):
+        """Обрабатывает столкновение корабля с пришельцем."""
+        # Уменьшение ships_left.
+        self.stats.ships_left -= 1
+
+        # Очистка списка пришельцев и удаление снарядов.
+        self.aliens.empty()
+        self.bullets.empty()
+
+        # Создание нового флота и размещение корабля в центре.
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # Пауза
+        sleep(0.5)
 
 
 if __name__ == '__main__':

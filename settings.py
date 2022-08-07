@@ -10,6 +10,7 @@ class Settings():
 
         # Настройки корабля
         self.ship_speed = 1.5
+        self.ship_limit = 3
 
         # Параметры снаяда.
         self.bulet_speed = 1.5
