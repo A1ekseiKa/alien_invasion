@@ -15,7 +15,7 @@ class Button():
 
         # Построение объекта rect кнопки и выравнивание по центру экрана.
         self.rect = pygame.Rect(0, 0, self.width, self.height)
-        self.rect_center = self.screen_rect.center
+        self.rect.center = self.screen_rect.center
 
         # Сообщение кнопки создается только один раз
         self._prep_msg(msg)
