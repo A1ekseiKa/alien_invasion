@@ -31,6 +31,7 @@ class AlienInvasion():
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
 
     def _check_events(self):
@@ -117,6 +118,10 @@ class AlienInvasion():
         alien.rect.x = alien.x
         alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
+
+    def _update_aliens(self):
+        """Обновляет позиции всех пришельцев во флоте."""
+        self.aliens.update()
 
 
 if __name__ == '__main__':
