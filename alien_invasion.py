@@ -64,6 +64,8 @@ class AlienInvasion():
         """Запускает игру при нажатии мышкой на кнопку Play."""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
+            # Сброс игровых настроек.
+            self.settings.initialize_dynamic_settings()
             # Сброс игровой статистики.
             self.stats.reset_stats()
             # Запуск игры.
