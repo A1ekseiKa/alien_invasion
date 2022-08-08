@@ -206,6 +206,7 @@ class AlienInvasion():
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
+            self.sb.check_high_score()
 
         # Если не осталось пришельцев на экране.
         if not self.aliens:
