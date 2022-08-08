@@ -73,6 +73,8 @@ class AlienInvasion():
             self.stats.reset_stats()
             # Запуск игры.
             self.stats.game_active = True
+            # Обнуление игровой статистики.
+            self.sb.prep_score()
             # Очистка списка пришельцев и снарядов.
             self.aliens.empty()
             self.bullets.empty()
@@ -201,7 +203,8 @@ class AlienInvasion():
             self.bullets, self.aliens, True, True)
 
         if collisions:
-            self.stats.score += self.settings.alien_points
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
 
         # Если не осталось пришельцев на экране.
