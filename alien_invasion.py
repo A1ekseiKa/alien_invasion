@@ -198,8 +198,12 @@ class AlienInvasion():
         # Проверка попаданий в пришельцев.
         # При обнаружении попадания, удалить снаряд и пришельца.
         collisions = pygame.sprite.groupcollide(
-            self.bullets, self.aliens, True, True
-        )
+            self.bullets, self.aliens, True, True)
+
+        if collisions:
+            self.stats.score += self.settings.alien_points
+            self.sb.prep_score()
+
         # Если не осталось пришельцев на экране.
         if not self.aliens:
             # Уничтожение существующих снарядов и создание нового флота.
