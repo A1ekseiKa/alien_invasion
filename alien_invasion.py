@@ -8,7 +8,7 @@ from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
 from button import Button
-from  scoreboard import Scoreboard
+from scoreboard import Scoreboard
 
 
 class AlienInvasion():
@@ -75,6 +75,7 @@ class AlienInvasion():
             self.stats.game_active = True
             # Обнуление игровой статистики.
             self.sb.prep_score()
+            self.sb.prep_level()
             # Очистка списка пришельцев и снарядов.
             self.aliens.empty()
             self.bullets.empty()
@@ -214,6 +215,10 @@ class AlienInvasion():
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+            # Увеличение уровня.
+            self.stats.level += 1
+            self.sb.prep_level()
 
     def _ship_hit(self):
         """Обрабатывает столкновение корабля с пришельцем."""
